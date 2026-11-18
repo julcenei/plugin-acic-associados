@@ -1,14 +1,20 @@
-# Gera o acic-associados.zip e publica a release quando uma tag vX.Y.Z é enviada.
-#   git tag v1.1.1 && git push origin v1.1.1
+# Publica uma release sempre que a versão do acic-associados.php mudar na main
+# (mesmo modelo do JPX Eventos). Para lançar: altere a versão (cabeçalho + ACICA_VERSION),
+# registre no changelog.txt e envie para a main. A tag, o .zip e a release são criados aqui.
 name: Release
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [main]
+    paths: [acic-associados.php]
+  workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
   release:
@@ -16,23 +22,51 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Conferir versão do plugin
+      - name: Ler e conferir a versão
+        id: versao
         run: |
-          TAG="${GITHUB_REF_NAME#v}"
-          HEADER=$(grep -m1 -E '^\s*\*\s*Version:' acic-associados.php | awk '{print $NF}')
-          if [ "$TAG" != "$HEADER" ]; then
-            echo "A tag ($TAG) não bate com o Version do plugin ($HEADER)."
+          CABECALHO=$(sed -n 's/^ \* Version:[[:space:]]*\([^[:space:]]*\).*/\1/p' acic-associados.php)
+          CONSTANTE=$(sed -n "s/.*define( 'ACICA_VERSION', '\([^']*\)' );.*/\1/p" acic-associados.php)
+          echo "Cabeçalho: $CABECALHO | ACICA_VERSION: $CONSTANTE"
+          if [ -z "$CABECALHO" ] || [ "$CABECALHO" != "$CONSTANTE" ]; then
+            echo "::error file=acic-associados.php::A versão do cabeçalho ($CABECALHO) e a ACICA_VERSION ($CONSTANTE) precisam ser iguais."
             exit 1
           fi
+          echo "versao=$CABECALHO" >> "$GITHUB_OUTPUT"
+          if git ls-remote --exit-code --tags origin "refs/tags/v$CABECALHO" >/dev/null; then
+            echo "A tag v$CABECALHO já existe — nada a publicar."
+            echo "publicar=nao" >> "$GITHUB_OUTPUT"
+          else
+            echo "publicar=sim" >> "$GITHUB_OUTPUT"
+          fi
 
-      - name: Montar zip
+      - name: Notas da versão (changelog.txt)
+        if: steps.versao.outputs.publicar == 'sim'
+        run: |
+          V=${{ steps.versao.outputs.versao }}
+          sh ferramentas/notas-versao.sh "$V" > notas.md
+          if [ ! -s notas.md ]; then
+            echo "::error file=changelog.txt::Não há entrada para a versão $V no changelog.txt."
+            exit 1
+          fi
+          printf '\nInstalação: baixe o acic-associados.zip abaixo e envie em Plugins › Adicionar novo › Enviar plugin. Depois desta, as próximas versões aparecem sozinhas no painel.\n' >> notas.md
+          cat notas.md
+
+      - name: Gerar o .zip
+        if: steps.versao.outputs.publicar == 'sim'
         run: |
           mkdir -p build/acic-associados
           rsync -a --exclude-from=.distignore ./ build/acic-associados/
           cd build && zip -rq ../acic-associados.zip acic-associados
+          cd .. && unzip -l acic-associados.zip | tail -1
 
-      - name: Publicar release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: acic-associados.zip
-          generate_release_notes: true
+      - name: Criar tag e release
+        if: steps.versao.outputs.publicar == 'sim'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V=${{ steps.versao.outputs.versao }}
+          gh release create "v$V" acic-associados.zip \
+            --target "$GITHUB_SHA" \
+            --title "ACIC Associados $V" \
+            --notes-file notas.md

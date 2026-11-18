@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name:       ACIC Associados
+ * Plugin URI:        https://github.com/julcenei/plugin-acic-associados
  * Description:       Cadastro dos associados da ACIC Caçador com importação da planilha (prévia, sincronização e desfazer) e listagem moderna com busca e filtro A–Z pelo shortcode [acic_associados].
  * Version:           1.1.1
  * Requires at least: 5.9

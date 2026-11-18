@@ -69,13 +69,7 @@ No Divi, coloque o shortcode num módulo **Texto** (ou **Código**). A listagem 
 
 ## Atualizações
 
-Publicar nova versão: subir o `Version` no cabeçalho de `acic-associados.php` (e `ACICA_VERSION`), fazer commit e enviar a tag:
-
-```
-git tag v1.0.1 && git push origin v1.0.1
-```
-
-O workflow gera o `acic-associados.zip` na release do repositório `julcenei/plugin-acic-associados` e o site mostra a atualização no painel.
+Para lançar uma versão: altere `Version:` no cabeçalho de `acic-associados.php` **e** `ACICA_VERSION` (iguais), registre a versão no topo do `changelog.txt` e envie para a `main`. O workflow `.github/workflows/release.yml` cria a tag, gera o `acic-associados.zip` e publica a release em `julcenei/plugin-acic-associados`. Não é preciso criar tags à mão. O site mostra a atualização em **Plugins**.
 
 Excluir o plugin não apaga os associados cadastrados, só o histórico de importações e o cache.
 
