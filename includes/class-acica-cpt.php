@@ -127,16 +127,23 @@ class ACICA_CPT {
 			'telefone' => array( __( 'Telefone', 'acic-associados' ), 'tel', '(49) 0000-0000' ),
 			'whatsapp' => array( __( 'WhatsApp', 'acic-associados' ), 'tel', '(49) 90000-0000' ),
 		);
+		$dicas = array(
+			'razao'    => ACICA_Ajuda::dica( __( 'O nome registrado da empresa. Aparece em letra menor, abaixo do nome fantasia, quando os dois forem diferentes.', 'acic-associados' ), 'cadastro' ),
+			'cnpj'     => ACICA_Ajuda::dica( __( 'Pode digitar só os números: o plugin coloca os pontos. Se for pessoa física, deixe em branco (CPF não aparece no site).', 'acic-associados' ), 'cadastro' ),
+			'telefone' => ACICA_Ajuda::dica( __( 'Com DDD. No celular, o visitante toca no número e já liga.', 'acic-associados' ), 'cadastro' ),
+			'whatsapp' => ACICA_Ajuda::dica( __( 'Número com DDD. O site mostra um botão verde que abre a conversa no WhatsApp.', 'acic-associados' ), 'cadastro' ),
+		);
 		echo '<div class="acica-campos">';
 		foreach ( $fields as $key => $f ) {
 			printf(
-				'<p><label for="acica_%1$s">%2$s</label><input type="%3$s" id="acica_%1$s" name="acica[%1$s]" value="%4$s" placeholder="%5$s" class="widefat"%6$s></p>',
+				'<p><span class="acica-rot"><label for="acica_%1$s">%2$s</label>%7$s</span><input type="%3$s" id="acica_%1$s" name="acica[%1$s]" value="%4$s" placeholder="%5$s" class="widefat"%6$s></p>',
 				esc_attr( $key ),
 				esc_html( $f[0] ),
 				esc_attr( $f[1] ),
 				esc_attr( $d[ $key ] ),
 				esc_attr( $f[2] ),
-				'cnpj' === $key || 'tel' === $f[1] ? ' inputmode="numeric"' : ''
+				'cnpj' === $key || 'tel' === $f[1] ? ' inputmode="numeric"' : '',
+				$dicas[ $key ] // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML montado e escapado em ACICA_Ajuda::dica().
 			);
 		}
 		echo '</div>';
@@ -157,7 +164,7 @@ class ACICA_CPT {
 			<label><input type="radio" name="acica_situacao" value="ativo" <?php checked( ! $inativo ); ?>> <?php esc_html_e( 'Ativo — aparece no site', 'acic-associados' ); ?></label><br>
 			<label><input type="radio" name="acica_situacao" value="inativo" <?php checked( $inativo ); ?>> <?php esc_html_e( 'Inativo — fica só no painel', 'acic-associados' ); ?></label>
 		</fieldset>
-		<p><label><input type="checkbox" name="acica_fixo" value="1" <?php checked( $fixo ); ?>> <?php esc_html_e( 'Manter sempre ativo', 'acic-associados' ); ?></label></p>
+		<p><label><input type="checkbox" name="acica_fixo" value="1" <?php checked( $fixo ); ?>> <?php esc_html_e( 'Manter sempre ativo', 'acic-associados' ); ?></label><?php echo ACICA_Ajuda::dica( __( 'Use para quem não vem na planilha do sistema mas deve continuar no site, como um associado honorário.', 'acic-associados' ), 'cadastro' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 		<p class="description"><?php esc_html_e( 'Marque para que a importação da planilha nunca inative este associado (ex.: associado honorário que não está na planilha).', 'acic-associados' ); ?></p>
 		<?php
 	}

@@ -1,0 +1,441 @@
+<title>Guia do ACIC Associados</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap">
+<style>
+/* Layout (o mesmo do guia do JPX Eventos): guia de campo — índice fixo à esquerda, coluna de leitura com capturas anotadas (letras laranja = marcações nas imagens). */
+:root{
+  --bg:#F4F7F6; --surface:#FFFFFF; --ink:#14211D; --muted:#4E5E58; --line:#D9E2DE;
+  --accent:#00843F; --accent-soft:#E3F3E9; --mark:#C2410C; --mark-soft:#FDECDF; --code:#EEF3F1;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'Figtree','Segoe UI',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1513; --surface:#151F1C; --ink:#E4EDEA; --muted:#A3B5AE; --line:#2B3B36;
+  --accent:#4CC98A; --accent-soft:#143322; --mark:#FF8F57; --mark-soft:#3A2419; --code:#1C2925; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1513; --surface:#151F1C; --ink:#E4EDEA; --muted:#A3B5AE; --line:#2B3B36;
+  --accent:#4CC98A; --accent-soft:#143322; --mark:#FF8F57; --mark-soft:#3A2419; --code:#1C2925; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3{font-family:var(--display);line-height:1.15;letter-spacing:-.015em;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5vw,52px);font-weight:700}
+h2{font-size:clamp(26px,3.4vw,34px);font-weight:700}
+h3{font-size:21px;font-weight:600}
+p{margin:0}
+code,kbd{font-family:var(--mono);font-size:.84em}
+code{background:var(--code);padding:2px 6px;border-radius:6px;white-space:nowrap}
+kbd{display:inline-block;padding:1px 7px;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;background:var(--surface)}
+
+.pagina{display:grid;grid-template-columns:250px minmax(0,1fr);gap:56px;max-width:1180px;margin:0 auto;padding-block:40px 96px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Índice */
+.indice{position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow:auto;padding-right:8px}
+.indice__marca{display:flex;align-items:center;gap:10px;margin-bottom:20px;font:700 16px/1 var(--display)}
+.indice__marca i{width:30px;height:30px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:var(--surface);font-style:normal;font-size:15px}
+.indice ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;counter-reset:cap}
+.indice li{counter-increment:cap}
+.indice a{display:flex;gap:10px;padding:7px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:15px;line-height:1.35}
+.indice a::before{content:counter(cap);min-width:18px;font:600 13px/1.6 var(--mono);color:var(--accent)}
+.indice a:hover{background:var(--accent-soft);color:var(--ink)}
+.indice a[aria-current="true"]{background:var(--accent-soft);color:var(--ink);font-weight:600}
+.indice .anexo a::before{content:"+"}
+.indice details summary{display:none}
+
+/* Conteúdo */
+main{min-width:0;display:flex;flex-direction:column;gap:72px}
+.capa{display:flex;flex-direction:column;gap:18px;padding-bottom:8px}
+.chamada{font:600 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.capa p.lede{font-size:20px;color:var(--muted);max-width:62ch}
+.fatos{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.fato{display:flex;flex-direction:column;gap:2px;padding:14px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--line);min-width:0;flex:1 1 200px}
+.fato strong{font:700 22px/1.2 var(--display)}
+.fato span{font-size:14px;color:var(--muted)}
+
+section{display:flex;flex-direction:column;gap:20px}
+section > p,section > ul,section > ol:not(.passos):not(.legenda){max-width:66ch}
+section h2{display:flex;align-items:baseline;gap:14px}
+section h2 small{font:600 14px/1 var(--mono);color:var(--accent)}
+.sub{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+ul,ol{margin:0;padding-left:1.25em}
+li+li{margin-top:6px}
+
+/* Passos numerados (sequência real) */
+.passos{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;counter-reset:p;max-width:68ch}
+.passos > li{counter-increment:p;display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;align-items:start;margin:0}
+.passos > li::before{content:counter(p);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--surface);font:700 16px/1 var(--display)}
+.passos > li > div > strong:first-child{display:block}
+
+/* Figuras anotadas */
+figure{margin:0;display:flex;flex-direction:column;gap:12px}
+.quadro{display:block;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(20,33,29,.06)}
+.quadro img{width:100%}
+figure.estreita{max-width:620px}
+figcaption{font-size:15px;color:var(--muted)}
+.legenda{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-width:72ch}
+.legenda li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;margin:0;font-size:16px}
+.legenda b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--mark);color:#fff;font:700 13px/1 var(--body);margin-top:1px}
+.dupla{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.dupla--celular{grid-template-columns:repeat(2,minmax(0,280px));justify-content:start}
+.selo-anim{align-self:flex-start;font:600 12px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--mark);background:var(--mark-soft);padding:6px 10px;border-radius:999px}
+
+/* Avisos */
+.nota{display:flex;flex-direction:column;gap:6px;padding:16px 20px;border-radius:12px;background:var(--accent-soft);max-width:70ch}
+.nota strong{font-weight:700}
+.nota--atencao{background:var(--mark-soft)}
+
+/* Perguntas */
+details.pergunta{border-bottom:1px solid var(--line);padding:14px 0;max-width:72ch}
+details.pergunta summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+details.pergunta summary::after{content:"+";color:var(--accent);font:600 20px/1 var(--mono)}
+details.pergunta[open] summary::after{content:"−"}
+details.pergunta p{margin-top:10px;color:var(--muted)}
+
+/* Tabela */
+.tabela{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+
+.rodape{color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:20px}
+
+@media (max-width:960px){
+  .pagina{grid-template-columns:minmax(0,1fr);gap:28px;padding-block:20px 72px}
+  .indice{position:static;max-height:none;padding:0}
+  .indice details{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:6px 10px}
+  .indice details summary{display:block;cursor:pointer;padding:8px 4px;font-weight:600}
+  main{gap:56px}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .dupla{grid-template-columns:minmax(0,1fr)}
+  .dupla--celular{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<div class="pagina">
+  <nav class="indice" aria-label="Índice do guia">
+    <div class="indice__marca"><i aria-hidden="true">A</i>ACIC Associados</div>
+    <details open>
+      <summary>Índice do guia</summary>
+      <ol>
+        <li><a href="#visao-geral">Onde fica tudo</a></li>
+        <li><a href="#importar">Atualizar pela planilha</a></li>
+        <li><a href="#conferir">Conferir antes de aplicar</a></li>
+        <li><a href="#desfazer">Pronto, histórico e desfazer</a></li>
+        <li><a href="#cadastro">Cadastrar ou editar à mão</a></li>
+        <li><a href="#inativar">Tirar do site e devolver</a></li>
+        <li><a href="#visitante">O que o visitante vê</a></li>
+        <li><a href="#no-site">Colocar a lista no site</a></li>
+        <li><a href="#planilha">Como a planilha deve vir</a></li>
+        <li><a href="#perguntas">Perguntas frequentes</a></li>
+        <li class="anexo"><a href="#implantacao">Para a agência</a></li>
+      </ol>
+    </details>
+  </nav>
+
+  <main>
+    <header class="capa">
+      <span class="chamada">Guia de uso</span>
+      <h1>Como manter a lista de associados do site em dia</h1>
+      <p class="lede">Este guia mostra, tela por tela, como atualizar os associados com a planilha do sistema, corrigir um cadastro e conferir como a lista aparece para quem visita o site.</p>
+      <div class="fatos">
+        <div class="fato"><strong>3 passos</strong><span>enviar, conferir e aplicar a planilha</span></div>
+        <div class="fato"><strong>Nada muda sem conferir</strong><span>e a última importação pode ser desfeita</span></div>
+        <div class="fato"><strong>Painel › Associados</strong><span>onde fica tudo no WordPress</span></div>
+      </div>
+    </header>
+
+    <!-- 1 -->
+    <section id="visao-geral">
+      <h2><small>01</small>Onde fica tudo</h2>
+      <p>Entre no painel do WordPress do site da ACIC. No menu da esquerda, clique em <strong>Associados</strong>. Ali estão a lista de empresas, o cadastro de um associado novo, a importação da planilha e este guia, em <strong>Ajuda</strong>.</p>
+      <figure>
+        <a class="quadro" href="img/painel-inicio.webp" target="_blank" rel="noopener"><img src="img/painel-inicio.webp" width="1600" height="800" alt="Menu Associados no painel do WordPress, o quadro Primeiros passos e a lista de associados"></a>
+        <ol class="legenda">
+          <li><b>A</b><span>O menu <strong>Associados</strong>: Todos os associados, Novo associado, Importar planilha e Ajuda.</span></li>
+          <li><b>B</b><span><strong>Primeiros passos</strong>: aparece no começo e some sozinho quando tudo estiver pronto. Cada cartão leva direto para a tela certa.</span></li>
+          <li><b>C</b><span>Filtros da lista: <strong>Todos</strong>, só os <strong>Ativos</strong> (os que aparecem no site) ou só os <strong>Inativos</strong>.</span></li>
+          <li><b>D</b><span>Busca do painel. Acha pelo nome fantasia, pela razão social ou pelo CNPJ (com ou sem pontos).</span></li>
+        </ol>
+      </figure>
+      <div class="nota"><strong>Dica</strong><p>Viu um botão <strong>?</strong> ao lado de um campo? Clique nele para ver uma explicação curta e um link para o trecho deste guia.</p></div>
+    </section>
+
+    <!-- 2 -->
+    <section id="importar">
+      <h2><small>02</small>Atualizar pela planilha</h2>
+      <p>Este é o jeito do dia a dia: em vez de conferir empresa por empresa, você envia a planilha que sai do sistema da ACIC e o plugin descobre sozinho quem entrou, quem saiu e quem mudou.</p>
+      <figure>
+        <span class="selo-anim">Animação</span>
+        <a class="quadro" href="img/anim-importar.webp" target="_blank" rel="noopener"><img src="img/anim-importar.webp" width="1100" height="715" alt="Animação: escolher a planilha, clicar em Conferir planilha, ver o resumo e aplicar"></a>
+        <figcaption>O caminho completo: escolher o arquivo, conferir e aplicar.</figcaption>
+      </figure>
+
+      <ol class="passos">
+        <li><div><strong>Exporte a planilha do sistema</strong>Gere a lista de empresas associadas como sempre. Não precisa abrir nem arrumar o arquivo: pode ser <code>.xls</code>, <code>.xlsx</code> ou <code>.csv</code>.</div></li>
+        <li><div><strong>Abra Associados › Importar planilha</strong>No menu da esquerda do painel.</div></li>
+        <li><div><strong>Escolha o arquivo</strong>Clique em <strong>Escolher arquivo</strong> e selecione a planilha no computador.</div></li>
+        <li><div><strong>Diga o que tem na planilha</strong>Quase sempre é a <strong>lista completa</strong>. Veja a diferença logo abaixo.</div></li>
+        <li><div><strong>Clique em Conferir planilha</strong>Nada muda no site ainda: primeiro aparece o resumo do que vai acontecer (<a href="#conferir">capítulo 3</a>).</div></li>
+      </ol>
+
+      <figure>
+        <a class="quadro" href="img/importar-envio.webp" target="_blank" rel="noopener"><img src="img/importar-envio.webp" width="1600" height="716" alt="Tela Importar planilha com o campo do arquivo, as duas opções e o botão Conferir planilha"></a>
+        <ol class="legenda">
+          <li><b>A</b><span>O arquivo da planilha.</span></li>
+          <li><b>B</b><span>O que tem nesta planilha: a lista completa ou só alguns associados.</span></li>
+          <li><b>C</b><span><strong>Conferir planilha</strong>: mostra o resumo antes de mudar qualquer coisa.</span></li>
+        </ol>
+      </figure>
+
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Opção</th><th>Quando usar</th><th>O que acontece com quem não está na planilha</th></tr></thead>
+          <tbody>
+            <tr><td><strong>A lista completa de associados</strong></td><td>A planilha do sistema, com todo mundo. É o caso normal.</td><td>Fica <strong>inativo</strong>: sai do site, mas continua guardado no painel.</td></tr>
+            <tr><td><strong>Só alguns associados</strong></td><td>Uma planilha montada à mão, só com empresas novas ou corrigidas.</td><td>Nada: continua como está.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section id="conferir">
+      <h2><small>03</small>Conferir antes de aplicar</h2>
+      <p>Depois de enviar, aparece um resumo com o que vai mudar. Leia os números, abra as listas se quiser ver os nomes e só então clique em <strong>Aplicar alterações</strong>.</p>
+      <figure>
+        <a class="quadro" href="img/importar-previa.webp" target="_blank" rel="noopener"><img src="img/importar-previa.webp" width="1600" height="1056" alt="Resumo da importação com os números e a lista de associados com dados atualizados aberta"></a>
+        <ol class="legenda">
+          <li><b>A</b><span>O arquivo enviado, quantas linhas tinha e quantas empresas são. Logo abaixo, as colunas que o plugin reconheceu.</span></li>
+          <li><b>B</b><span>O resumo em números (veja a tabela abaixo).</span></li>
+          <li><b>C</b><span>Clique no título de cada grupo para ver os nomes. Em <strong>Com dados atualizados</strong> aparece o antes, riscado, e o depois.</span></li>
+          <li><b>D</b><span><strong>Aplicar alterações</strong> grava tudo. Se algo parecer errado, clique em <strong>Cancelar</strong>: nada é mudado.</span></li>
+        </ol>
+      </figure>
+
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Número</th><th>O que significa</th></tr></thead>
+          <tbody>
+            <tr><td><strong>novos</strong></td><td>Empresas da planilha que ainda não estão cadastradas. Entram no site.</td></tr>
+            <tr><td><strong>com dados atualizados</strong></td><td>Já estão no site, mas a planilha traz algo diferente (nome fantasia, razão social ou CNPJ).</td></tr>
+            <tr><td><strong>voltam ao site</strong></td><td>Estavam inativas e apareceram de novo na planilha.</td></tr>
+            <tr><td><strong>saem do site</strong></td><td>Estão no site, mas não vieram na planilha. Ficam inativas (só na lista completa).</td></tr>
+            <tr><td><strong>sem mudança</strong></td><td>Estão iguais. Nada acontece com elas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="nota nota--atencao"><strong>Atenção a um número alto em “saem do site”</strong><p>Se mais de 20% da lista for sair, o plugin mostra um aviso amarelo. Normalmente é sinal de planilha incompleta (um filtro ligado no sistema, por exemplo). Nesse caso, clique em <strong>Cancelar</strong> e exporte de novo.</p></div>
+    </section>
+
+    <!-- 4 -->
+    <section id="desfazer">
+      <h2><small>04</small>Pronto, histórico e desfazer</h2>
+      <p>Ao aplicar, a lista do site já está atualizada. A tela mostra o que foi feito e oferece um atalho para desfazer.</p>
+      <figure>
+        <a class="quadro" href="img/importar-pronto.webp" target="_blank" rel="noopener"><img src="img/importar-pronto.webp" width="1600" height="532" alt="Tela Pronto com os números da importação, o botão Ver associados e o link Desfazer"></a>
+        <ol class="legenda">
+          <li><b>A</b><span>O que mudou nesta importação.</span></li>
+          <li><b>B</b><span><strong>Ver associados</strong> abre a lista do painel.</span></li>
+          <li><b>C</b><span><strong>Desfazer a última importação</strong>: volta tudo como estava antes dela.</span></li>
+        </ol>
+      </figure>
+      <p>Na mesma tela <strong>Importar planilha</strong>, abaixo do envio, fica o histórico das últimas importações: quando, qual arquivo, quem enviou e o que mudou.</p>
+      <figure>
+        <a class="quadro" href="img/historico.webp" target="_blank" rel="noopener"><img src="img/historico.webp" width="1600" height="378" alt="Tabela Importações anteriores e o link para desfazer a última"></a>
+        <ol class="legenda">
+          <li><b>A</b><span>Importações anteriores. A coluna <strong>Situação</strong> diz se foi aplicada ou desfeita.</span></li>
+          <li><b>B</b><span>O atalho para desfazer a última importação.</span></li>
+        </ol>
+      </figure>
+      <div class="nota nota--atencao"><strong>Desfazer volta tudo o que a importação mexeu</strong><p>Só a última importação pode ser desfeita. Se, depois dela, você editou à mão algum associado que ela tinha mudado, essa edição também volta para como estava antes.</p></div>
+    </section>
+
+    <!-- 5 -->
+    <section id="cadastro">
+      <h2><small>05</small>Cadastrar ou editar um associado à mão</h2>
+      <p>Para uma correção pontual (um telefone, um nome fantasia) ou para incluir alguém antes da próxima planilha: <strong>Associados › Novo associado</strong>, ou clique no nome da empresa na lista.</p>
+      <figure>
+        <a class="quadro" href="img/editar.webp" target="_blank" rel="noopener"><img src="img/editar.webp" width="1600" height="785" alt="Tela Editar associado com nome fantasia, campos, uma dica aberta, situação e o botão Atualizar"></a>
+        <ol class="legenda">
+          <li><b>A</b><span><strong>Nome fantasia</strong>, como deve aparecer no site. Sem nome fantasia, o site mostra a razão social.</span></li>
+          <li><b>B</b><span><strong>CNPJ</strong>: pode digitar só os números, o plugin coloca os pontos. Telefone e WhatsApp seguem o mesmo jeito, com DDD.</span></li>
+          <li><b>C</b><span>Uma dica aberta pelo botão <strong>?</strong>.</span></li>
+          <li><b>D</b><span><strong>Situação</strong>: ativo aparece no site; inativo fica só no painel. <strong>Manter sempre ativo</strong> impede que a planilha tire este associado do site.</span></li>
+          <li><b>E</b><span><strong>Atualizar</strong> (ou <strong>Publicar</strong>, num associado novo) grava. O site mostra a mudança na hora.</span></li>
+        </ol>
+      </figure>
+      <div class="nota"><strong>Campos em branco ficam fora do site</strong><p>CNPJ, telefone e WhatsApp são opcionais. Se a empresa não tiver um deles, a linha no site fica só com o que existe, sem espaço vazio.</p></div>
+      <div class="nota"><strong>A planilha não apaga o que você digitou</strong><p>Se a planilha não tiver telefone ou WhatsApp, os números cadastrados à mão continuam. Mas, se a planilha trouxer um nome fantasia diferente, vale o da planilha: corrija também no sistema da ACIC para não voltar na próxima importação.</p></div>
+    </section>
+
+    <!-- 6 -->
+    <section id="inativar">
+      <h2><small>06</small>Tirar do site, devolver e excluir</h2>
+      <p>Passe o mouse sobre o nome de uma empresa na lista do painel. Aparecem os atalhos <strong>Editar</strong>, <strong>Inativar</strong> (ou <strong>Reativar</strong>) e <strong>Colocar na lixeira</strong>.</p>
+      <figure>
+        <span class="selo-anim">Animação</span>
+        <a class="quadro" href="img/anim-inativar.webp" target="_blank" rel="noopener"><img src="img/anim-inativar.webp" width="1100" height="491" alt="Animação: clicar em Inativar e a situação mudar para Inativo"></a>
+        <figcaption>Um clique em <strong>Inativar</strong>: a empresa sai do site e a situação muda para <strong>Inativo</strong>.</figcaption>
+      </figure>
+      <figure>
+        <a class="quadro" href="img/lista-acoes.webp" target="_blank" rel="noopener"><img src="img/lista-acoes.webp" width="1600" height="714" alt="Lista de associados com os atalhos da linha, a coluna Situação e as ações em massa"></a>
+        <ol class="legenda">
+          <li><b>A</b><span>Atalhos da linha: <strong>Editar</strong>, <strong>Inativar</strong>/<strong>Reativar</strong> e <strong>Colocar na lixeira</strong>.</span></li>
+          <li><b>B</b><span><strong>Situação</strong> de cada associado: <strong>Ativo</strong> (no site) ou <strong>Inativo</strong>.</span></li>
+          <li><b>C</b><span><strong>Ações em massa</strong>: marque várias empresas, escolha <strong>Inativar</strong> ou <strong>Reativar</strong> e clique em <strong>Aplicar</strong>.</span></li>
+          <li><b>D</b><span>Clique em <strong>Inativos</strong> para ver só quem está fora do site.</span></li>
+        </ol>
+      </figure>
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Ação</th><th>Sai do site?</th><th>O cadastro continua?</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Inativar</strong></td><td>Sim</td><td>Sim. Volta com <strong>Reativar</strong> ou quando a empresa aparecer de novo na planilha.</td></tr>
+            <tr><td><strong>Colocar na lixeira</strong></td><td>Sim</td><td>Fica 30 dias na lixeira do WordPress e depois é apagado. Prefira <strong>Inativar</strong>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section id="visitante">
+      <h2><small>07</small>O que o visitante vê</h2>
+      <p>A página de associados mostra todas as empresas ativas em ordem alfabética, separadas por letra. A busca e as letras funcionam na hora, sem recarregar a página.</p>
+      <figure>
+        <a class="quadro" href="img/site-lista.webp" target="_blank" rel="noopener"><img src="img/site-lista.webp" width="1600" height="1186" alt="Lista de associados no site com busca, letras, grupo por letra, CNPJ e botões de contato"></a>
+        <ol class="legenda">
+          <li><b>A</b><span><strong>Busca</strong> por nome fantasia, razão social ou CNPJ. Não precisa de acento nem de letra maiúscula.</span></li>
+          <li><b>B</b><span><strong>Letras</strong>: mostram só as empresas que começam com aquela letra. Letras sem nenhuma empresa ficam apagadas.</span></li>
+          <li><b>C</b><span>Cada letra é um grupo, com a quantidade de empresas.</span></li>
+          <li><b>D</b><span>O <strong>CNPJ</strong>, quando cadastrado. CPF de pessoa física nunca aparece.</span></li>
+          <li><b>E</b><span><strong>Telefone</strong> (no celular, toca e liga) e <strong>WhatsApp</strong> (abre a conversa), quando cadastrados. Os números da imagem são ilustrativos.</span></li>
+        </ol>
+      </figure>
+      <div class="dupla">
+        <figure>
+          <span class="selo-anim">Animação</span>
+          <a class="quadro" href="img/anim-busca.webp" target="_blank" rel="noopener"><img src="img/anim-busca.webp" width="1000" height="655" alt="Animação: digitar farm na busca e depois clicar na letra P"></a>
+          <figcaption>Digitando <strong>farm</strong>, aparecem as farmácias. Depois, a letra <strong>P</strong> mostra só as empresas com P.</figcaption>
+        </figure>
+        <figure>
+          <a class="quadro" href="img/site-celular.webp" target="_blank" rel="noopener"><img src="img/site-celular.webp" width="700" height="1435" alt="Lista de associados no celular"></a>
+          <ol class="legenda">
+            <li><b>A</b><span>No celular, as letras ficam numa faixa só: arraste para o lado.</span></li>
+            <li><b>B</b><span>Os botões de contato ficam grandes, fáceis de tocar.</span></li>
+          </ol>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section id="no-site">
+      <h2><small>08</small>Colocar a lista no site</h2>
+      <p>A lista aparece em qualquer página onde estiver o código <code>[acic_associados]</code>. No site da ACIC, a página é <strong>Associados</strong>, feita com o Divi.</p>
+      <ol class="passos">
+        <li><div><strong>Abra a página no Divi</strong>Em <strong>Páginas</strong>, passe o mouse sobre <strong>Associados</strong> e clique em <strong>Editar com o Divi</strong> (ou abra a página e use <strong>Ativar o Visual Builder</strong>).</div></li>
+        <li><div><strong>Troque a lista antiga</strong>Apague os módulos <strong>Alternar</strong> (toggles) da lista antiga, que eram um por empresa.</div></li>
+        <li><div><strong>Adicione um módulo Texto</strong>No lugar deles, insira um módulo <strong>Texto</strong> e cole <code>[acic_associados]</code>.</div></li>
+        <li><div><strong>Salve</strong>Clique em <strong>Salvar</strong>. Pronto: daqui em diante a página se atualiza sozinha a cada importação ou edição.</div></li>
+      </ol>
+      <div class="sub">
+        <h3>Opções do código</h3>
+        <p>Para esconder uma parte, acrescente a opção com <code>"nao"</code>. Exemplo: <code>[acic_associados total="nao"]</code>.</p>
+        <div class="tabela">
+          <table>
+            <thead><tr><th>Opção</th><th>O que controla</th><th>Padrão</th></tr></thead>
+            <tbody>
+              <tr><td><code>total</code></td><td>A frase “675 empresas fazem parte da Associação…” no topo</td><td>sim</td></tr>
+              <tr><td><code>busca</code></td><td>O campo de busca</td><td>sim</td></tr>
+              <tr><td><code>letras</code></td><td>Os botões de A a Z</td><td>sim</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section id="planilha">
+      <h2><small>09</small>Como a planilha deve vir</h2>
+      <p>A planilha que sai do sistema da ACIC já vem do jeito certo. Se um dia o formato mudar, o plugin procura as colunas pelo nome do cabeçalho, em qualquer ordem, com ou sem acento:</p>
+      <div class="tabela">
+        <table>
+          <thead><tr><th>Campo</th><th>Nomes de coluna aceitos</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><strong>Razão social</strong></td><td>NOME, RAZÃO, RAZÃO SOCIAL, EMPRESA</td><td>obrigatória</td></tr>
+            <tr><td><strong>Nome fantasia</strong></td><td>NOMEFANTASIA, NOME FANTASIA, FANTASIA</td><td>opcional</td></tr>
+            <tr><td><strong>CNPJ</strong></td><td>CNPJ, CNPJ/CPF</td><td>opcional</td></tr>
+            <tr><td><strong>Telefone</strong></td><td>TELEFONE, FONE</td><td>opcional</td></tr>
+            <tr><td><strong>WhatsApp</strong></td><td>WHATSAPP, CELULAR</td><td>opcional</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul>
+        <li><strong>Cada CNPJ é um associado.</strong> Filiais aparecem separadas, cada uma com o seu nome fantasia e o seu CNPJ.</li>
+        <li><strong>Sem CNPJ, vale o nome.</strong> Linhas repetidas com a mesma razão social (mesmo com diferença de acento, pontuação ou LTDA/ME) viram um associado só.</li>
+        <li><strong>CPF não aparece.</strong> Quando a coluna CNPJ traz um CPF (pessoa física), o número é ignorado: não fica guardado nem aparece no site.</li>
+        <li><strong>Campo vazio não apaga.</strong> Um telefone em branco na planilha não apaga o que já está cadastrado no painel.</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section id="perguntas">
+      <h2><small>10</small>Perguntas frequentes</h2>
+      <div>
+        <details class="pergunta"><summary>Apareceu “formato antigo do Excel (.xls)”. E agora?</summary><p>O arquivo foi salvo no formato do Excel 97-2003, que o plugin não lê. Abra no Excel, use <strong>Arquivo › Salvar como</strong> e escolha <strong>Pasta de Trabalho do Excel (.xlsx)</strong>. Envie o arquivo novo. A planilha exportada pelo sistema da ACIC não tem esse problema.</p></details>
+        <details class="pergunta"><summary>Apareceu “Não encontrei a coluna com a razão social”.</summary><p>A primeira linha da planilha precisa ter os nomes das colunas, com uma chamada NOME ou RAZÃO SOCIAL. Confira se não foi enviada outra aba ou outro relatório.</p></details>
+        <details class="pergunta"><summary>Importei a planilha errada. Como volto?</summary><p>Em <strong>Associados › Importar planilha</strong>, clique em <strong>Desfazer a última importação</strong> (<a href="#desfazer">capítulo 4</a>). Depois envie a planilha certa.</p></details>
+        <details class="pergunta"><summary>Uma empresa saiu do site, mas continua associada.</summary><p>Ela não veio na planilha. Procure por ela na lista do painel, filtro <strong>Inativos</strong>, e clique em <strong>Reativar</strong>. Se ela nunca vem na planilha (um associado honorário, por exemplo), marque <strong>Manter sempre ativo</strong> no cadastro.</p></details>
+        <details class="pergunta"><summary>Corrigi um nome fantasia e a importação voltou o nome antigo.</summary><p>A planilha manda no nome fantasia, na razão social e no CNPJ. Corrija também no sistema da ACIC, para a próxima planilha já vir certa.</p></details>
+        <details class="pergunta"><summary>A mesma empresa aparece várias vezes no site.</summary><p>São filiais: cada uma tem o seu CNPJ. Se for a mesma empresa cadastrada duas vezes por engano, com o mesmo CNPJ, corrija no sistema da ACIC.</p></details>
+        <details class="pergunta"><summary>Quanto tempo leva uma importação?</summary><p>Poucos segundos. Não feche a página enquanto ela estiver carregando depois de clicar em <strong>Aplicar alterações</strong>.</p></details>
+        <details class="pergunta"><summary>Quem pode importar a planilha?</summary><p>Quem tem perfil de <strong>Editor</strong> ou <strong>Administrador</strong> no WordPress.</p></details>
+      </div>
+    </section>
+
+    <!-- Anexo -->
+    <section id="implantacao">
+      <h2><small>+</small>Para a agência</h2>
+      <ul>
+        <li><strong>Atualizações</strong>: chegam pelo painel, em <strong>Plugins</strong>, quando uma nova versão é publicada no GitHub (<code>julcenei/acic-associados</code>).</li>
+        <li><strong>Cache</strong>: a lista do site fica guardada em cache e é refeita sozinha a cada importação, edição, inativação ou exclusão. Plugins de cache de página (e o Cloudflare) podem precisar de uma limpeza para mostrar a mudança na hora.</li>
+        <li><strong>Desinstalar</strong>: excluir o plugin apaga só o histórico de importações e o cache. Os associados ficam no banco de propósito.</li>
+        <li><strong>Este guia</strong>: o texto está em <code>manual/fonte.html</code>. As capturas são refeitas com <code>ferramentas/capturas-manual.py</code> num WordPress de testes (dados de <code>ferramentas/dados-demo.php</code>) e o <code>manual/index.html</code> é gerado por <code>ferramentas/montar-manual.py</code>.</li>
+      </ul>
+    </section>
+
+    <p class="rodape">ACIC Associados · Jotapix Agência Criativa · Guia da versão 1.1</p>
+  </main>
+</div>
+
+<script>
+(function () {
+  // Destaca no índice o capítulo que está na tela.
+  var links = Array.prototype.slice.call(document.querySelectorAll('.indice a'));
+  var alvos = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  function marcar() {
+    var atual = 0, limite = window.innerHeight * 0.3;
+    alvos.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= limite) { atual = i; } });
+    links.forEach(function (a, i) { a.setAttribute('aria-current', i === atual ? 'true' : 'false'); });
+  }
+  var pendente = false;
+  window.addEventListener('scroll', function () { if (!pendente) { pendente = true; requestAnimationFrame(function () { pendente = false; marcar(); }); } }, { passive: true });
+  marcar();
+  // No celular, fechar o índice depois de escolher um capítulo.
+  var det = document.querySelector('.indice details');
+  links.forEach(function (a) { a.addEventListener('click', function () { if (window.matchMedia('(max-width:960px)').matches && det) { det.open = false; } }); });
+  if (window.matchMedia('(max-width:960px)').matches && det) { det.open = false; }
+})();
+</script>

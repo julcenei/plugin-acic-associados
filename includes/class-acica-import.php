@@ -567,11 +567,11 @@ class ACICA_Import {
 				<input type="hidden" name="action" value="acica_previa">
 				<?php wp_nonce_field( 'acica_previa' ); ?>
 				<p>
-					<label for="acica-planilha" class="acica-label"><?php esc_html_e( 'Planilha', 'acic-associados' ); ?></label>
+					<span class="acica-rot"><label for="acica-planilha" class="acica-label"><?php esc_html_e( 'Planilha', 'acic-associados' ); ?></label><?php echo ACICA_Ajuda::dica( __( 'O arquivo exportado do sistema, sem precisar abrir nem arrumar. Precisa ter a coluna NOME (razão social); NOMEFANTASIA, CNPJ, TELEFONE e WHATSAPP são aproveitadas quando existirem.', 'acic-associados' ), 'planilha' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 					<input type="file" id="acica-planilha" name="planilha" accept=".xlsx,.xls,.csv" required>
 				</p>
 				<fieldset class="acica-modo">
-					<legend class="acica-label"><?php esc_html_e( 'O que tem nesta planilha?', 'acic-associados' ); ?></legend>
+					<legend class="acica-label"><?php esc_html_e( 'O que tem nesta planilha?', 'acic-associados' ); ?><?php echo ACICA_Ajuda::dica( __( 'Quase sempre é a lista completa: a planilha que sai do sistema com todos os associados. Use "Só alguns" quando montar uma planilha só com empresas novas ou corrigidas.', 'acic-associados' ), 'importar' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></legend>
 					<label class="acica-opcao">
 						<input type="radio" name="modo" value="completa" checked>
 						<span><strong><?php esc_html_e( 'A lista completa de associados', 'acic-associados' ); ?></strong><br>

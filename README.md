@@ -5,6 +5,7 @@ Plugin WordPress da Jotapix para a lista de associados da ACIC Caçador (portala
 - Cadastro de associados no painel (**Associados**): novo, editar, inativar/reativar e excluir.
 - **Importar planilha**: envia a planilha exportada do sistema, confere o que muda e só então aplica. Dá para desfazer a última importação.
 - Shortcode `[acic_associados]`: listagem por letra, com busca e filtro A–Z. CNPJ, telefone e WhatsApp aparecem quando preenchidos.
+- **Ajuda** (Associados › Ajuda): guia com telas anotadas e animações, quadro de "Primeiros passos" e botões **?** com dicas nos campos.
 
 ## Importação (passo a passo)
 
@@ -52,6 +53,18 @@ O cabeçalho pode estar em qualquer ordem, com ou sem acento:
 Exemplo: `[acic_associados total="nao"]`.
 
 No Divi, coloque o shortcode num módulo **Texto** (ou **Código**). A listagem fica em cache e é atualizada sozinha quando um associado é salvo ou importado.
+
+## Guia (manual)
+
+- Texto: `manual/fonte.html` (o mesmo modelo do guia do JPX Eventos).
+- Capturas e animações: `ferramentas/capturas-manual.py`, num WordPress de **testes** em português, preparado com `ferramentas/dados-demo.php` (nunca rode no site da ACIC).
+- Depois de editar o texto ou trocar imagens: `python3 ferramentas/montar-manual.py` gera o `manual/index.html` que o painel mostra.
+- `ferramentas/` e `manual/fonte.html` não vão no .zip.
+
+## Versões
+
+- **1.1.0**: guia de uso no painel (Associados › Ajuda), Primeiros passos e dicas "?"; lê a planilha .xls exportada pelo sistema (que é .xlsx por dentro).
+- **1.0.0**: primeira versão.
 
 ## Atualizações
 

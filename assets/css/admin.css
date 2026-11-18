@@ -257,3 +257,226 @@
 .acica-link-desfazer .dashicons {
 	vertical-align: -4px;
 }
+
+/* Dicas "?" */
+.acica-rot {
+	display: inline-flex;
+	align-items: center;
+	margin-bottom: 4px;
+}
+
+.acica-rot label,
+.acica-rot .acica-label {
+	margin-bottom: 0;
+}
+
+.acica-dica {
+	position: relative;
+	display: inline-flex;
+	vertical-align: middle;
+	margin-left: 6px;
+}
+
+.acica-dica__btn {
+	width: 22px;
+	height: 22px;
+	padding: 0;
+	border-radius: 50%;
+	border: 1px solid #8c8f94;
+	background: #fff;
+	color: #50575e;
+	font: 700 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	cursor: pointer;
+}
+
+.acica-dica__btn:hover,
+.acica-dica__btn[aria-expanded="true"] {
+	background: #2271b1;
+	border-color: #2271b1;
+	color: #fff;
+}
+
+.acica-dica__btn:focus-visible {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+}
+
+.acica-dica__balao {
+	position: absolute;
+	left: -8px;
+	top: 30px;
+	z-index: 30;
+	width: 300px;
+	padding: 12px 14px;
+	border-radius: 8px;
+	background: #1d2327;
+	color: #f0f0f1;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 1.5;
+	text-transform: none;
+	letter-spacing: 0;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+	white-space: normal;
+}
+
+.acica-dica__balao::before {
+	content: "";
+	position: absolute;
+	left: 14px;
+	top: -6px;
+	width: 12px;
+	height: 12px;
+	background: #1d2327;
+	transform: rotate(45deg);
+}
+
+.acica-dica__balao a {
+	display: inline-block;
+	margin-top: 6px;
+	color: #72aee6;
+	font-weight: 600;
+}
+
+#acica_situacao .acica-dica__balao {
+	left: auto;
+	right: -8px;
+	width: 240px;
+}
+
+#acica_situacao .acica-dica__balao::before {
+	left: auto;
+	right: 14px;
+}
+
+/* Primeiros passos */
+.acica-pp {
+	margin: 16px 0 20px;
+	padding: 20px 24px;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-left: 4px solid #00843f;
+	border-radius: 4px;
+}
+
+.acica-pp__topo {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.acica-pp h2 {
+	margin: 0 0 2px;
+	font-size: 17px;
+}
+
+.acica-pp__topo p {
+	margin: 0;
+	color: #646970;
+}
+
+.acica-pp__acoes {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.acica-pp__ocultar {
+	color: #646970;
+}
+
+.acica-pp__barra {
+	height: 6px;
+	margin: 14px 0 16px;
+	border-radius: 99px;
+	background: #f0f0f1;
+	overflow: hidden;
+}
+
+.acica-pp__barra span {
+	display: block;
+	height: 100%;
+	background: #00a32a;
+	border-radius: 99px;
+}
+
+.acica-pp__lista {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 12px;
+	margin: 0;
+	list-style: none;
+}
+
+.acica-pp__lista li {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0;
+	padding: 14px;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+}
+
+.acica-pp__lista li.is-feito {
+	background: #f6f7f7;
+	border-style: dashed;
+}
+
+.acica-pp__lista li.is-feito strong {
+	color: #646970;
+	text-decoration: line-through;
+}
+
+.acica-pp__n {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	background: #00843f;
+	color: #fff;
+	font-weight: 700;
+}
+
+.acica-pp__lista li.is-feito .acica-pp__n {
+	background: #00a32a;
+}
+
+.acica-pp__txt {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.acica-pp__txt small {
+	color: #646970;
+	font-size: 12px;
+}
+
+.acica-pp__lista a {
+	margin-top: auto;
+	font-weight: 600;
+}
+
+/* Página Ajuda */
+.acica-ajuda__topo {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.acica-ajuda__guia {
+	display: block;
+	width: 100%;
+	height: calc(100vh - 150px);
+	min-height: 600px;
+	border: 1px solid #c3c4c7;
+	border-radius: 6px;
+	background: #fff;
+}

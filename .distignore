@@ -9,3 +9,5 @@ node_modules
 tests
 .DS_Store
 Thumbs.db
+ferramentas
+manual/fonte.html
