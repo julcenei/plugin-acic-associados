@@ -8,7 +8,7 @@ Plugin WordPress da Jotapix para a lista de associados da ACIC Caçador (portala
 
 ## Importação (passo a passo)
 
-1. **Associados › Importar planilha** e escolha o arquivo (.xlsx ou .csv, do jeito que sai do sistema).
+1. **Associados › Importar planilha** e escolha o arquivo (.xls, .xlsx ou .csv, do jeito que sai do sistema).
 2. Diga o que tem na planilha:
    - **A lista completa**: quem não estiver nela fica **inativo** (sai do site, continua no painel).
    - **Só alguns associados**: adiciona e atualiza sem tirar ninguém do site.
@@ -33,7 +33,9 @@ O cabeçalho pode estar em qualquer ordem, com ou sem acento:
 - Com CNPJ na planilha, a comparação usa o CNPJ (empresas com o mesmo nome e CNPJs diferentes ficam separadas).
 - Campo vazio na planilha nunca apaga o que já está cadastrado no painel.
 - Associado com **Manter sempre ativo** marcado nunca é inativado pela importação.
-- O formato antigo .xls não é lido: salve como .xlsx ou .csv.
+- Cada CNPJ é um associado: filiais aparecem separadas, cada uma com o seu CNPJ.
+- CPF na coluna CNPJ (pessoa física) é ignorado: não é guardado nem aparece no site.
+- Arquivos .xls exportados pelo sistema (que por dentro são .xlsx) são lidos normalmente. Só o .xls antigo do Excel 97-2003 precisa ser salvo como .xlsx ou .csv.
 
 ## Shortcode
 

@@ -87,7 +87,8 @@ class ACICA_Shortcode {
 				if ( $a['letra'] !== $b['letra'] ) {
 					return '#' === $a['letra'] ? -1 : ( '#' === $b['letra'] ? 1 : strcmp( $a['letra'], $b['letra'] ) );
 				}
-				return strcmp( $a['ordem'], $b['ordem'] );
+				$c = strcmp( $a['ordem'], $b['ordem'] );
+				return 0 !== $c ? $c : strcmp( $a['cnpj'], $b['cnpj'] ); // Filiais de mesmo nome pela ordem do CNPJ.
 			}
 		);
 		set_transient( 'acica_lista_dados', $items, DAY_IN_SECONDS );

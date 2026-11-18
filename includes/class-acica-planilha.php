@@ -34,14 +34,23 @@ class ACICA_Planilha {
 	 */
 	public static function ler( $path, $name ) {
 		$ext = strtolower( pathinfo( $name, PATHINFO_EXTENSION ) );
-		if ( 'xlsx' === $ext ) {
+
+		// O formato vem do conteúdo, não da extensão: o sistema da ACIC exporta
+		// arquivos .xls que por dentro são .xlsx.
+		$fh   = fopen( $path, 'rb' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
+		$head = $fh ? (string) fread( $fh, 8 ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread
+		if ( $fh ) {
+			fclose( $fh ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+		}
+
+		if ( 0 === strpos( $head, "PK\x03\x04" ) ) {
 			$grid = self::ler_xlsx( $path );
-		} elseif ( 'csv' === $ext || 'txt' === $ext ) {
-			$grid = self::ler_csv( $path );
-		} elseif ( 'xls' === $ext ) {
+		} elseif ( 0 === strpos( $head, "\xD0\xCF\x11\xE0" ) ) {
 			return new WP_Error( 'acica_xls', __( 'Este arquivo está no formato antigo do Excel (.xls). Abra no Excel e use "Salvar como" › "Pasta de Trabalho do Excel (.xlsx)", ou salve como .csv, e envie de novo.', 'acic-associados' ) );
+		} elseif ( in_array( $ext, array( 'csv', 'txt' ), true ) ) {
+			$grid = self::ler_csv( $path );
 		} else {
-			return new WP_Error( 'acica_ext', __( 'Envie a planilha em .xlsx ou .csv.', 'acic-associados' ) );
+			return new WP_Error( 'acica_ext', __( 'Não reconheci o formato do arquivo. Envie a planilha em .xlsx ou .csv.', 'acic-associados' ) );
 		}
 		if ( is_wp_error( $grid ) ) {
 			return $grid;

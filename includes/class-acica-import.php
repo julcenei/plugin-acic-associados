@@ -562,13 +562,13 @@ class ACICA_Import {
 		?>
 		<div class="acica-card">
 			<h2><?php esc_html_e( 'Envie a planilha exportada do sistema', 'acic-associados' ); ?></h2>
-			<p><?php esc_html_e( 'Pode enviar o arquivo do jeito que sai do sistema (.xlsx ou .csv). Nada muda no site agora: primeiro você confere o que vai acontecer.', 'acic-associados' ); ?></p>
+			<p><?php esc_html_e( 'Pode enviar o arquivo do jeito que sai do sistema (.xls, .xlsx ou .csv). Nada muda no site agora: primeiro você confere o que vai acontecer.', 'acic-associados' ); ?></p>
 			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" enctype="multipart/form-data">
 				<input type="hidden" name="action" value="acica_previa">
 				<?php wp_nonce_field( 'acica_previa' ); ?>
 				<p>
 					<label for="acica-planilha" class="acica-label"><?php esc_html_e( 'Planilha', 'acic-associados' ); ?></label>
-					<input type="file" id="acica-planilha" name="planilha" accept=".xlsx,.csv" required>
+					<input type="file" id="acica-planilha" name="planilha" accept=".xlsx,.xls,.csv" required>
 				</p>
 				<fieldset class="acica-modo">
 					<legend class="acica-label"><?php esc_html_e( 'O que tem nesta planilha?', 'acic-associados' ); ?></legend>
