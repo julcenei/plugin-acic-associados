@@ -1,0 +1,397 @@
+/* ACIC Associados — listagem pública [acic_associados] */
+
+.acica {
+	--acica-verde: #00843f;
+	--acica-verde-escuro: #006b33;
+	--acica-verde-claro: #e8f5ec;
+	--acica-linha: #00ab4e;
+	--acica-texto: #222;
+	--acica-texto-2: #555;
+	--acica-texto-3: #666;
+	--acica-borda: #d5dbd8;
+	--acica-divisor: #e6e9e7;
+	--acica-fundo: #f4f6f5;
+	color: var(--acica-texto);
+	font-family: inherit;
+	line-height: 1.4;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.acica *,
+.acica *::before,
+.acica *::after {
+	box-sizing: border-box;
+}
+
+.acica [hidden] {
+	display: none !important;
+}
+
+.acica .acica-sr {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.acica p.acica-intro {
+	margin: 0;
+	padding: 0;
+	font-size: 17px;
+	color: var(--acica-texto-2);
+}
+
+/* Filtros */
+.acica .acica-filtros {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 20px;
+	background: var(--acica-fundo);
+	border-radius: 14px;
+}
+
+.acica .acica-busca {
+	position: relative;
+}
+
+.acica .acica-busca svg {
+	position: absolute;
+	left: 16px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--acica-texto-3);
+	pointer-events: none;
+}
+
+.acica input.acica-busca__campo {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	height: 52px;
+	margin: 0;
+	padding: 0 16px 0 46px;
+	font: inherit;
+	font-size: 16px;
+	color: var(--acica-texto);
+	background: #fff;
+	border: 1px solid var(--acica-borda);
+	border-radius: 10px;
+	box-shadow: none;
+}
+
+.acica input.acica-busca__campo::placeholder {
+	color: #767676;
+	opacity: 1;
+}
+
+.acica .acica-letras {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.acica button.acica-letra {
+	min-width: 40px;
+	height: 40px;
+	margin: 0;
+	padding: 0 8px;
+	font: inherit;
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 1;
+	color: #333;
+	background: #fff;
+	border: 1px solid var(--acica-borda);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.acica button.acica-letra--todos {
+	min-width: 64px;
+	padding: 0 12px;
+}
+
+.acica button.acica-letra:hover:not(:disabled) {
+	border-color: var(--acica-verde);
+	color: var(--acica-verde-escuro);
+}
+
+.acica button.acica-letra.is-ativa,
+.acica button.acica-letra.is-ativa:hover {
+	font-weight: 600;
+	color: #fff;
+	background: var(--acica-verde);
+	border-color: var(--acica-verde);
+}
+
+.acica button.acica-letra:disabled {
+	color: #b8bebb;
+	background: transparent;
+	border-color: transparent;
+	cursor: default;
+}
+
+.acica input:focus-visible,
+.acica button:focus-visible,
+.acica a:focus-visible {
+	outline: 3px solid var(--acica-verde);
+	outline-offset: 2px;
+}
+
+.acica p.acica-resultado {
+	margin: -8px 0 0;
+	padding: 0;
+	font-size: 15px;
+	color: var(--acica-texto-2);
+}
+
+/* Nada encontrado */
+.acica .acica-vazio {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 32px;
+	background: var(--acica-fundo);
+	border-radius: 14px;
+}
+
+.acica .acica-vazio p {
+	margin: 0;
+	padding: 0;
+	font-size: 15px;
+	color: var(--acica-texto-2);
+}
+
+.acica .acica-vazio p.acica-vazio__titulo {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--acica-texto);
+}
+
+.acica button.acica-limpar {
+	height: 44px;
+	margin: 0;
+	padding: 0 18px;
+	font: inherit;
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--acica-verde);
+	background: #fff;
+	border: 1px solid var(--acica-verde);
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+/* Grupos por letra */
+.acica .acica-grupos {
+	display: flex;
+	flex-direction: column;
+	gap: 36px;
+}
+
+.acica .acica-grupo__topo {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid var(--acica-linha);
+}
+
+.acica h2.acica-grupo__letra {
+	margin: 0;
+	padding: 0;
+	font-family: inherit;
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 1;
+	color: var(--acica-verde);
+}
+
+.acica .acica-grupo__qtd {
+	font-size: 14px;
+	color: var(--acica-texto-3);
+}
+
+.acica ul.acica-itens {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	column-gap: 32px;
+	list-style: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.acica ul.acica-itens li.acica-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	column-gap: 24px;
+	row-gap: 10px;
+	margin: 0;
+	padding: 12px 0;
+	list-style: none !important;
+	border-bottom: 1px solid var(--acica-divisor);
+}
+
+.acica ul.acica-itens li.acica-item::before,
+.acica ul.acica-itens li.acica-item::marker {
+	content: none;
+}
+
+/* Com CNPJ ou contatos: uma empresa por linha, em colunas */
+.acica--cnpj ul.acica-itens,
+.acica--contato ul.acica-itens {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.acica--cnpj ul.acica-itens li.acica-item,
+.acica--contato ul.acica-itens li.acica-item {
+	padding: 14px 0;
+}
+
+.acica .acica-item__nome {
+	flex: 1 1 320px;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.acica .acica-nome {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--acica-texto);
+	overflow-wrap: anywhere;
+}
+
+.acica .acica-razao {
+	font-size: 13px;
+	color: var(--acica-texto-3);
+	overflow-wrap: anywhere;
+}
+
+.acica .acica-item__cnpj {
+	flex: 0 0 190px;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.acica .acica-rotulo {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.6px;
+	color: var(--acica-texto-3);
+}
+
+.acica .acica-cnpj {
+	font-size: 14px;
+	color: #333;
+	font-variant-numeric: tabular-nums;
+}
+
+.acica .acica-item__contato {
+	flex: 0 0 310px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.acica a.acica-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	height: 44px;
+	padding: 0 14px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1;
+	color: #333;
+	text-decoration: none;
+	background: #fff;
+	border: 1px solid var(--acica-borda);
+	border-radius: 22px;
+	font-variant-numeric: tabular-nums;
+	transition: border-color 0.15s, background-color 0.15s;
+}
+
+.acica a.acica-btn svg {
+	flex: none;
+	color: var(--acica-texto-2);
+}
+
+.acica a.acica-btn--tel:hover {
+	color: var(--acica-verde-escuro);
+	border-color: var(--acica-verde);
+}
+
+.acica a.acica-btn--wa {
+	padding: 0 16px;
+	font-weight: 600;
+	color: #fff;
+	background: var(--acica-verde);
+	border-color: var(--acica-verde);
+}
+
+.acica a.acica-btn--wa svg {
+	color: #fff;
+}
+
+.acica a.acica-btn--wa:hover {
+	color: #fff;
+	background: var(--acica-verde-escuro);
+	border-color: var(--acica-verde-escuro);
+}
+
+@media (max-width: 760px) {
+	.acica .acica-filtros {
+		padding: 14px;
+	}
+
+	/* Letras numa faixa só, com rolagem lateral */
+	.acica .acica-letras {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		margin: 0 -14px;
+		padding: 2px 14px 6px;
+		scroll-padding: 0 14px;
+		scrollbar-width: thin;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.acica button.acica-letra {
+		flex: none;
+		min-width: 44px;
+		height: 44px;
+	}
+
+	.acica .acica-item__cnpj,
+	.acica .acica-item__contato {
+		flex: 1 1 100%;
+	}
+
+	.acica .acica-item__cnpj:empty,
+	.acica .acica-item__contato:empty {
+		display: none;
+	}
+
+	.acica ul.acica-itens {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.acica * {
+		transition: none !important;
+	}
+}

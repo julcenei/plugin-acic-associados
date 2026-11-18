@@ -1,0 +1,38 @@
+# Gera o acic-associados.zip e publica a release quando uma tag vX.Y.Z é enviada.
+#   git tag v1.0.0 && git push origin v1.0.0
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Conferir versão do plugin
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          HEADER=$(grep -m1 -E '^\s*\*\s*Version:' acic-associados.php | awk '{print $NF}')
+          if [ "$TAG" != "$HEADER" ]; then
+            echo "A tag ($TAG) não bate com o Version do plugin ($HEADER)."
+            exit 1
+          fi
+
+      - name: Montar zip
+        run: |
+          mkdir -p build/acic-associados
+          rsync -a --exclude-from=.distignore ./ build/acic-associados/
+          cd build && zip -rq ../acic-associados.zip acic-associados
+
+      - name: Publicar release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: acic-associados.zip
+          generate_release_notes: true

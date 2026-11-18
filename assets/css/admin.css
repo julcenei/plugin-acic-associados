@@ -1,0 +1,259 @@
+/* ACIC Associados — painel */
+
+.acica-campos {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 0 20px;
+}
+
+.acica-campos label,
+.acica-label {
+	display: block;
+	margin-bottom: 4px;
+	font-weight: 600;
+}
+
+.acica-situacao label {
+	display: inline-block;
+	margin: 4px 0;
+}
+
+.acica-tag {
+	display: inline-block;
+	padding: 2px 10px;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.acica-tag--ativo {
+	color: #00602e;
+	background: #e3f4e9;
+}
+
+.acica-tag--inativo {
+	color: #50575e;
+	background: #f0f0f1;
+}
+
+.column-acica_situacao {
+	width: 110px;
+}
+
+.column-acica_cnpj {
+	width: 160px;
+}
+
+.column-acica_contato .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	vertical-align: -3px;
+	color: #646970;
+}
+
+/* Tela de importação */
+.acica-wrap {
+	max-width: 1100px;
+}
+
+.acica-passos {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 28px;
+	margin: 16px 0 20px;
+	padding: 0;
+	list-style: none;
+}
+
+.acica-passos li {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	color: #646970;
+	font-size: 14px;
+}
+
+.acica-passos__n {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	font-weight: 600;
+	background: #f0f0f1;
+	border: 1px solid #c3c4c7;
+}
+
+.acica-passos li.is-atual {
+	color: #1d2327;
+	font-weight: 600;
+}
+
+.acica-passos li.is-atual .acica-passos__n {
+	color: #fff;
+	background: #00843f;
+	border-color: #00843f;
+}
+
+.acica-passos li.is-feito .acica-passos__n {
+	color: #00602e;
+	background: #e3f4e9;
+	border-color: #9fd5b3;
+}
+
+.acica-card {
+	margin: 0 0 20px;
+	padding: 24px 28px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+}
+
+.acica-card h2 {
+	margin-top: 0;
+	font-size: 18px;
+}
+
+.acica-card--ok h2 .dashicons {
+	color: #00843f;
+	font-size: 26px;
+	width: 26px;
+	height: 26px;
+	vertical-align: -5px;
+}
+
+.acica-modo {
+	margin: 16px 0;
+	padding: 0;
+	border: 0;
+}
+
+.acica-opcao {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	max-width: 640px;
+	margin: 8px 0;
+	padding: 12px 14px;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.acica-opcao:has(input:checked) {
+	border-color: #00843f;
+	background: #f3faf6;
+}
+
+.acica-opcao input {
+	margin-top: 3px;
+}
+
+.acica-arquivo {
+	font-size: 14px;
+}
+
+.acica-arquivo .dashicons {
+	color: #00843f;
+}
+
+.acica-numeros {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 20px 0;
+}
+
+.acica-num {
+	flex: 1 1 140px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 14px 16px;
+	border-radius: 8px;
+	background: #f6f7f7;
+	border: 1px solid #e0e0e0;
+}
+
+.acica-num__n {
+	font-size: 28px;
+	font-weight: 700;
+	line-height: 1.1;
+}
+
+.acica-num__l {
+	font-size: 13px;
+	color: #50575e;
+}
+
+.acica-num--novo { background: #edf7f1; border-color: #b8e0c7; }
+.acica-num--novo .acica-num__n { color: #00602e; }
+.acica-num--alt { background: #eef4fb; border-color: #c2d6ee; }
+.acica-num--alt .acica-num__n { color: #1d4f91; }
+.acica-num--reat { background: #f3f0fb; border-color: #d3c8ef; }
+.acica-num--reat .acica-num__n { color: #4b2f91; }
+.acica-num--sai { background: #fcf0f1; border-color: #f0c2c6; }
+.acica-num--sai .acica-num__n { color: #a1151f; }
+.acica-num.is-zero { opacity: 0.6; }
+
+.acica-det {
+	margin: 10px 0;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	background: #fff;
+}
+
+.acica-det > summary {
+	padding: 12px 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.acica-det[open] > summary {
+	border-bottom: 1px solid #dcdcde;
+}
+
+.acica-det .description {
+	margin: 10px 14px;
+}
+
+.acica-det table {
+	border: 0;
+}
+
+.acica-det table ins {
+	text-decoration: none;
+	background: #e3f4e9;
+	padding: 0 3px;
+}
+
+.acica-det table del {
+	color: #8c2b2b;
+}
+
+.acica-acoes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	align-items: center;
+	margin-top: 24px;
+}
+
+.acica-acoes form {
+	margin: 0;
+}
+
+.acica-desfazer {
+	margin-top: 16px;
+}
+
+.acica-link-desfazer {
+	color: #b32d2e;
+}
+
+.acica-link-desfazer .dashicons {
+	vertical-align: -4px;
+}
