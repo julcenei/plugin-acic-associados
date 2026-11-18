@@ -63,6 +63,7 @@ No Divi, coloque o shortcode num módulo **Texto** (ou **Código**). A listagem 
 
 ## Versões
 
+- **1.1.1**: atualizações automáticas pelo repositório `julcenei/plugin-acic-associados`.
 - **1.1.0**: guia de uso no painel (Associados › Ajuda), Primeiros passos e dicas "?"; lê a planilha .xls exportada pelo sistema (que é .xlsx por dentro).
 - **1.0.0**: primeira versão.
 
@@ -74,7 +75,7 @@ Publicar nova versão: subir o `Version` no cabeçalho de `acic-associados.php` 
 git tag v1.0.1 && git push origin v1.0.1
 ```
 
-O workflow gera o `acic-associados.zip` na release e o site mostra a atualização no painel.
+O workflow gera o `acic-associados.zip` na release do repositório `julcenei/plugin-acic-associados` e o site mostra a atualização no painel.
 
 Excluir o plugin não apaga os associados cadastrados, só o histórico de importações e o cache.
 
